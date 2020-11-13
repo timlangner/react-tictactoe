@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { calculateWinner } from '../helper';
 import Board from './Board';
 
@@ -8,6 +8,13 @@ const Game = () => {
     const [xIsNext, setXisNext] = useState(true);
     const winner = calculateWinner(history[stepNumber])
     const xO = xIsNext ? "X" : "O";
+
+    useEffect(() => {
+        if (winner) {
+            // Show alert if the game is over
+            alert(`The winner is: ${winner}!`);
+        }
+    }, [winner])
 
     const handleClick = (i) => {
         const historyPoint = history.slice(0, stepNumber + 1);
@@ -41,7 +48,7 @@ const Game = () => {
 
     return (
         <>
-            <h1>React Tic Tac Toe - With Hooks</h1>
+            <h1>Tic Tac Toe with React Hooks</h1>
             <Board squares={history[stepNumber]} onClick={handleClick} />
             <div className="info-wrapper">
                 <div>
